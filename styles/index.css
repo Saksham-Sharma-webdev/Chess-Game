@@ -1,0 +1,44 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #302e2b;
+  color: white;
+  width: 100vw;
+}
+
+#root{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#board{
+  height: 560px;
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.white{
+  background-color: #EEEED2;
+}
+
+.black{
+  background-color: #769656;
+}
+
+.boardRow{
+  height: 70px;
+  display: flex;
+}
+
+.boardSquare{
+  height: 70px;
+  width: 70px;
+}
