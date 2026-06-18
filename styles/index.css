@@ -41,4 +41,12 @@ body{
 .boardSquare{
   height: 70px;
   width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.piece{
+  width: 75%;
+  cursor: pointer;
 }

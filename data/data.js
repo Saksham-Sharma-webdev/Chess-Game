@@ -38,7 +38,6 @@ function initGame(){
   const game = [] // 2D array of board
 
   for (let i = chessRows.length; i > 0; i--) {
-    console.log(i)
     game.push(rowGenerator(i))
   }
 
