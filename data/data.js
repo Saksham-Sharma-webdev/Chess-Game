@@ -1,9 +1,16 @@
+import { renderHighlight } from "../render/main.js"
+
 const chessRows = [1,2,3,4,5,6,7,8]
 const chessColumns = ['a','b','c','d','e','f','g','h']
 
 // tell about the square as object
 function square(color,id,piece){
-  return {color,id,piece}
+  const highlightSquare = function(value){
+    renderHighlight(this.id)
+    this.highlighted = value
+  }
+
+  return {color,id,piece, highlightSquare}
 }
 
 // generate the row

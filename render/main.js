@@ -1,5 +1,9 @@
 import * as piece from "../data/pieces.js";
 import { board } from "../helper/constants.js";
+import globalState from "../state.js";
+
+
+const flatData = globalState.flat()
 
 function pieceRender(data) {
   data.forEach(function (row) {
@@ -13,6 +17,58 @@ function pieceRender(data) {
       }
     });
   });
+}
+
+function selfHighlight(piece){
+  document.getElementById(piece.current_position).classList.add("highlightSquare")
+}
+
+function clearPreviousSelfHighlight(piece){
+  if(piece){
+    document.getElementById(piece.current_position).classList.remove("highlightSquare")
+  }
+}
+
+function renderHighlight(squareId){
+  const highlightSpan = document.createElement("span")
+  highlightSpan.classList.add("highlight")
+  document.getElementById(squareId).appendChild(highlightSpan)
+}
+
+function clearAllHighlights(){
+  flatData.forEach((elem)=>{
+    // if any square already highlighted then remove that highlight
+    if(elem.highlighted){ 
+      document.getElementById(elem.id).innerHTML = ""
+      elem.highlighted = false 
+    }
+  })
+}
+
+// move element to passed squareId
+function movePiece(piece, squareId) {
+  flatData.forEach(element => {
+    // to find currently taken square element
+    if(element.id === piece.current_position){
+      element.piece = null
+    }
+
+    // to add the piece object to the new square element where to place
+    if(element.id === squareId){
+      element.piece = piece
+    }
+  });
+  clearAllHighlights()
+  const prevPiece = document.getElementById(piece.current_position) 
+
+  const currPiece = document.getElementById(squareId) 
+
+  currPiece.innerHTML = prevPiece.innerHTML
+  prevPiece.classList.remove("highlightSquare")
+  prevPiece.innerHTML = ""
+
+  piece.current_position = squareId
+
 }
 
 // render board only when game starts (one time, first time only)
@@ -96,4 +152,6 @@ function initGameRender(data) {
   pieceRender(data);
 }
 
-export { initGameRender };
+export { initGameRender, renderHighlight,clearAllHighlights, selfHighlight, clearPreviousSelfHighlight,
+  movePiece
+};
